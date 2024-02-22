@@ -15,7 +15,7 @@ This action will create a WireGuard tunnel to a remote host, and then use that t
 ## Usage
 
 ```yaml
-- uses: juandelacruz-calvo/actions-ssh-wireguard@0.3
+- uses: juandelacruz-calvo/actions-ssh-wireguard@0.4
   with:
     # Required: The SSH user to connect as.
     user: ""

@@ -1,4 +1,4 @@
-name: "SSH over WireGuard v0.3"
+name: "SSH over WireGuard v0.4"
 description: "SSH to your private servers over WireGuard VPN."
 branding:
   icon: "lock"
