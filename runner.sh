@@ -24,6 +24,9 @@ echo "Configuring WireGuard..."
 echo "$WIREGUARD_CONFIG" | sudo tee /etc/wireguard/wg0.conf
 echo "$SSH_KEY" | sudo tee /ssh.pub
 
+# Check the validity of the SSH key
+ssh-keygen -l -f /ssh.pub
+
 echo "Starting WireGuard..."
 # Start wireguard
 wg-quick up wg0
