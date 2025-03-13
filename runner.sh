@@ -9,10 +9,10 @@ SSH_KEY=${SSH_KEY}
 SSH_SCRIPT=${SSH_SCRIPT}
 WIREGUARD_CONFIG=${WIREGUARD_CONFIG}
 
-[ -z $SSH_HOST ] && echo "Missing SSH_HOST argument"
-[ -z $SSH_KEY ] && echo "Missing SSH_KEY argument"
-[ -z $SSH_SCRIPT ] && echo "Missing SSH_SCRIPT argument"
-[ -z $WIREGUARD_CONFIG ] && echo "Missing WIREGUARD_CONFIG argument"
+[ -z "$SSH_HOST" ] && echo "Missing SSH_HOST argument"
+[ -z "$SSH_KEY" ] && echo "Missing SSH_KEY argument"
+[ -z "$SSH_SCRIPT" ] && echo "Missing SSH_SCRIPT argument"
+[ -z "$WIREGUARD_CONFIG" ] && echo "Missing WIREGUARD_CONFIG argument"
 
 echo "Installing WireGuard and SSH..."
 # Install wireguard
@@ -21,11 +21,11 @@ sudo apt-get install -y wireguard openssh-client resolvconf
 
 echo "Configuring WireGuard..."
 # Create wireguard config
-echo "$WIREGUARD_CONFIG" | sudo tee /etc/wireguard/wg0.conf
-echo "$SSH_KEY" | sudo tee /ssh.pub
+echo "$WIREGUARD_CONFIG" | sudo cat /etc/wireguard/wg0.conf
+echo "$SSH_KEY" | sudo cat /ssh.pub
 
 # Set permissions
-chmod 600 /ssh.pub
+sudo chmod 600 /ssh.pub
 
 # Check the validity of the SSH key
 ssh-keygen -l -f /ssh.pub
