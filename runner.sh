@@ -21,8 +21,8 @@ sudo apt-get install -y wireguard openssh-client resolvconf
 
 echo "Configuring WireGuard..."
 # Create wireguard config
-sudo echo "$WIREGUARD_CONFIG" > /etc/wireguard/wg0.conf
-sudo echo "$SSH_KEY" > /ssh.pub
+echo "$WIREGUARD_CONFIG" | sudo tee /etc/wireguard/wg0.conf > /dev/null
+echo "$SSH_KEY" | sudo tee /ssh.pub > /dev/null
 
 echo "Successfully created Wireguard config files"
 # Set permissions
