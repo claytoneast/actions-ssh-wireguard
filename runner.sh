@@ -1,5 +1,5 @@
 #!/bin/bash
-
+set -e
 echo "=== WireGuard/SSH GitHub Action ==="
 
 SSH_USER=${SSH_USER:-root}
@@ -21,9 +21,10 @@ sudo apt-get install -y wireguard openssh-client resolvconf
 
 echo "Configuring WireGuard..."
 # Create wireguard config
-echo "$WIREGUARD_CONFIG" | sudo cat /etc/wireguard/wg0.conf
-echo "$SSH_KEY" | sudo cat /ssh.pub
+sudo echo "$WIREGUARD_CONFIG" > /etc/wireguard/wg0.conf
+sudo echo "$SSH_KEY" > /ssh.pub
 
+echo "Successfully created Wireguard config files"
 # Set permissions
 sudo chmod 600 /ssh.pub
 
