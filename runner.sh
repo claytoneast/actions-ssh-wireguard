@@ -22,22 +22,21 @@ sudo apt-get install -y wireguard openssh-client resolvconf
 echo "Configuring WireGuard..."
 # Create wireguard config
 echo "$WIREGUARD_CONFIG" | sudo tee /etc/wireguard/wg0.conf > /dev/null
-echo "$SSH_KEY" | sudo tee /ssh.pub > /dev/null
+echo "$SSH_KEY" | sudo tee /ssh.private > /dev/null
 
 echo "Successfully created Wireguard config files"
 
-# TODO: change .pub to .private or something else
 # Check the validity of the SSH key
-ssh-keygen -l -f /ssh.pub
+ssh-keygen -l -f /ssh.private
 
 # start ssh-agent
 eval "$(ssh-agent -s)"
 # Add the SSH key to the agent
-ssh-add /ssh.pub
+ssh-add /ssh.private
 
 echo "Starting WireGuard..."
 # Start wireguard
 wg-quick up wg0
 
 echo "Running SSH script..."
-ssh -o ConnectTimeout=30 -o BatchMode=yes -o StrictHostKeyChecking=accept-new -o ForwardAgent=yes -i /ssh.pub -p "$SSH_PORT" "$SSH_USER"@"$SSH_HOST" "$SSH_SCRIPT"
+ssh -o ConnectTimeout=30 -o BatchMode=yes -o StrictHostKeyChecking=accept-new -o ForwardAgent=yes -i /ssh.private -p "$SSH_PORT" "$SSH_USER"@"$SSH_HOST" "$SSH_SCRIPT"
