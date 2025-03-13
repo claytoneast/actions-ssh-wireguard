@@ -17,7 +17,7 @@ WIREGUARD_CONFIG=${WIREGUARD_CONFIG}
 echo "Installing WireGuard and SSH..."
 # Install wireguard
 sudo apt-get update -y
-sudo apt-get install -y wireguard openssh-client resolvconf ssh-agent
+sudo apt-get install -y wireguard openssh-client resolvconf
 
 echo "Configuring WireGuard..."
 # Create wireguard config
@@ -30,6 +30,8 @@ echo "Successfully created Wireguard config files"
 # Check the validity of the SSH key
 ssh-keygen -l -f /ssh.pub
 
+# start ssh-agent
+eval "$(ssh-agent -s)"
 # Add the SSH key to the agent
 ssh-add /ssh.pub
 
