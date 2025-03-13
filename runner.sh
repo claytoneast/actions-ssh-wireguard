@@ -26,7 +26,7 @@ echo "$SSH_KEY" | sudo tee /ssh.pub > /dev/null
 
 echo "Successfully created Wireguard config files"
 # Set permissions
-sudo chmod 600 /ssh.pub
+#  chmod 600 /ssh.pub
 
 # Check the validity of the SSH key
 ssh-keygen -l -f /ssh.pub
