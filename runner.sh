@@ -25,11 +25,13 @@ echo "$WIREGUARD_CONFIG" | sudo tee /etc/wireguard/wg0.conf > /dev/null
 echo "$SSH_KEY" | sudo tee /ssh.pub > /dev/null
 
 echo "Successfully created Wireguard config files"
-# Set permissions
-#  chmod 600 /ssh.pub
 
+# TODO: change .pub to .private or something else
 # Check the validity of the SSH key
 ssh-keygen -l -f /ssh.pub
+
+# Add the SSH key to the agent
+ssh-add /ssh.pub
 
 echo "Starting WireGuard..."
 # Start wireguard
